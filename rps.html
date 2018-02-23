@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Wakanda Foerever</title>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-offset-2 col-md-8">
+                <div class="jumbotron">
+                    <h1><span><strong>Wakandani Rock Paper Scissors</strong></span></h1>
+                    <br>
+                    <h2>You chose: <span id="user-text"><strong>...Nothing.</strong></span></h2>
+                    <br>
+                    <h2>The computer chose: <span id="cpu-choice"><strong>...Something</strong></span></h2>
+                    <br>
+                    <h2>Your Wins: <span id="wins"><strong>0</strong></span></h2>
+                    <br>
+                    <h2>Your Losses: <span id="losses"><strong>0</strong></span></h2>
+                    <br>
+                    <h2>Your Ties: <span id="ties"><strong>0</strong></span></h2>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        
+        function getRandomInt(min, max) {
+            min = Math.ceil(min);
+            max = Math.floor(max);
+            return Math.floor(Math.random() * (max - min)) + min; //The maximum is exclusive and the minimum is inclusive
+        }
+        
+        
+        var wins = document.getElementById("wins");
+        var numWins = 0;
+        var losses = document.getElementById("losses");
+        var numLosses = 0;
+        var ties = document.getElementById("ties");
+        var numTies = 0;
+        var userText = document.getElementById("user-text");
+        var userTextInt = -1;
+        var cpuChoice = document.getElementById("cpu-choice");
+        var firstRow = ["t","l","w"];
+        var secondRow = ["w","t","l"];
+        var thirdRow = ["l","w","t"];
+        var gameResults = [];
+        var rpsGame = ["r","p","s"];
+        
+        //Add values to the multidimensional array
+        gameResults.push(firstRow);
+        gameResults.push(secondRow);
+        gameResults.push(thirdRow);
+
+        //Print out a bunch of stuff to make sure the initial state is correct
+        console.log(gameResults);
+        console.log(userTextInt);
+        wins.innerHTML = numWins;
+        console.log(wins.innerHTML)
+        losses.innerHTML = numLosses;
+        console.log(losses.innerHTML);
+        ties.innerHTML = numTies;
+        console.log(ties.innerHTML);
+        
+        //Get the party started
+        document.onkeyup = function(event) {
+        userText.innerHTML = event.key;
+        
+
+        //Find the index for whatever the user entered
+        for (var i = 0; i < rpsGame.length; i++) {
+            userTextInt = rpsGame.indexOf(userText.textContent)
+        }
+
+        //Print something; setup some other stuff; change what the user sees; print something else for sanity
+        console.log(userTextInt);
+        var randomNum = getRandomInt(0,rpsGame.length);
+        var randomChoice = rpsGame[randomNum];
+        cpuChoice.innerHTML = randomChoice;
+        console.log(cpuChoice.innerHTML);
+
+        //Manage the game scoring
+        if (userTextInt != 0 || 1 || 2){
+            alert("Please press 'r' for Rock, 'p' for Paper, or 's' for Scissors to play");
+        }
+        else if (userTextInt == randomNum){
+            numTies++;
+            ties.innerHTML = numTies;
+        //If array indices are equal there's no need to check the array; we know it's a tie
+        }
+        else if (gameResults[userTextInt][randomNum] == "w"){
+            numWins++;
+            wins.innerHTML = numWins;
+        //If array indices are not equal, check for a "w" first
+        }
+        else {
+            numLosses++;
+            losses.innerHTML = numLosses;
+        //If it's not a tie or a win then it's a loss by default, which is cool because again we don't have to check the array
+        }
+    
+    };
+
+    </script>
+    
+</body>
+</html>
