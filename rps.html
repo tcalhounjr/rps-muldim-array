@@ -55,7 +55,6 @@
         gameResults.push(firstRow);
         gameResults.push(secondRow);
         gameResults.push(thirdRow);
-
         //Print out a bunch of stuff to make sure the initial state is correct
         console.log(gameResults);
         console.log(userTextInt);
@@ -70,21 +69,18 @@
         document.onkeyup = function(event) {
         userText.innerHTML = event.key;
         
-
         //Find the index for whatever the user entered
         for (var i = 0; i < rpsGame.length; i++) {
             userTextInt = rpsGame.indexOf(userText.textContent)
         }
-
         //Print something; setup some other stuff; change what the user sees; print something else for sanity
         console.log(userTextInt);
         var randomNum = getRandomInt(0,rpsGame.length);
         var randomChoice = rpsGame[randomNum];
         cpuChoice.innerHTML = randomChoice;
         console.log(cpuChoice.innerHTML);
-
         //Manage the game scoring
-        if (userTextInt != 0 || 1 || 2){
+        if ((userTextInt != 0) && (userTextInt != 1) && (userTextInt != 2)) {
             alert("Please press 'r' for Rock, 'p' for Paper, or 's' for Scissors to play");
         }
         else if (userTextInt == randomNum){
@@ -104,7 +100,6 @@
         }
     
     };
-
     </script>
     
 </body>
